@@ -1,0 +1,25 @@
+{
+  "queue": {
+    "roomMates": [
+      {"id": 1, "order": 1, "name": "Marcus" , "isActive" : true },
+      {"id": 2, "order": 2, "name": "Alonso" ,"isActive" : true  },
+      {"id": 3, "order": 3, "name": "Jidenna","isActive" : true  },
+      {"id": 4, "order": 4, "name": "Kristina", "isActive" : true },
+      {"id": 5, "order": 5, "name": "Hanna"  , "isActive" : true }
+    ]
+  },
+  "notifications": [
+    {
+    "id": 1,  
+    "queueOrder": 1, 
+    "roomMateName": "Marcus",
+    "typeTrash" : [
+      { "typename": "Paper"},
+      { "typename": "Normal"}
+    ], 
+    "dateCollection": "30-10-2025",
+    "isCollected" : true,
+    "isAbsence" : false
+    } 
+  ] 
+}
