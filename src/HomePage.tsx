@@ -1,9 +1,43 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Circle, Check, Trash2 } from "lucide-react";
 
+declare global {
+  interface Window {
+    Pushye?: any;
+  }
+}
+
 export default function HomePage() {
+
+  useEffect(() => {
+    const initPushye = async () => {
+      if (typeof window === "undefined") return;
+
+      // Aguarda script carregar
+      const interval = setInterval(async () => {
+        if (window.Pushye) {
+          clearInterval(interval);
+          try {
+            const subscribed = await window.Pushye.isSubscribed();
+            if (!subscribed) {
+              console.log("Solicitando permissão para notificações...");
+              await window.Pushye.subscribe();
+              console.log("✅ Notificações ativadas!");
+            } else {
+              console.log("🔔 Usuário já inscrito no Pushye");
+            }
+          } catch (error) {
+            console.error("❌ Erro ao inicializar Pushye:", error);
+          }
+        }
+      }, 1000);
+    };
+
+    initPushye();
+  }, []);
+  
   type TrashItem = {
     id: number;
     name: string;
