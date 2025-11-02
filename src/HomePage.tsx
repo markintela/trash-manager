@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Circle, Check, Trash2 } from "lucide-react";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare global {
   interface Window {
     Pushye?: any;
@@ -37,7 +38,7 @@ export default function HomePage() {
 
     initPushye();
   }, []);
-  
+
   type TrashItem = {
     id: number;
     name: string;
