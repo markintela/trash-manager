@@ -88,7 +88,7 @@ export default function Roommates() {
                   }&color=ffffff`}
                   alt={person.name}
                   className={`flex-none rounded-full bg-gray-100 shadow-sm ${
-                    isHighlighted ? "h-36 w-36" : "h-12 w-12"
+                    isHighlighted ? "h-30 w-30" : "h-12 w-12"
                   }`}
                 />
                 <div className="min-w-0 flex-auto">
