@@ -1,7 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getRoommates, Roommate, getNextRomomMate } from "@/app/services/RoomMateService";
+import {
+  getRoommates,
+  Roommate,
+  getNextRomomMate,
+} from "@/app/services/RoomMateService";
 import { createNotification } from "@/app/services/NotificationService";
 
 export default function Roommates() {
@@ -79,7 +83,9 @@ export default function Roommates() {
                 <img
                   src={`https://ui-avatars.com/api/?name=${
                     person.name
-                  }&background=${fallbackColors[index % fallbackColors.length]}&color=ffffff`}
+                  }&background=${
+                    fallbackColors[index % fallbackColors.length]
+                  }&color=ffffff`}
                   alt={person.name}
                   className={`flex-none rounded-full bg-gray-100 shadow-sm ${
                     isHighlighted ? "h-36 w-36" : "h-12 w-12"
@@ -99,8 +105,8 @@ export default function Roommates() {
                 </div>
               </div>
 
-              <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                <div className="mt-1 flex items-center gap-x-1.5">
+              <div className="flex flex-col items-end sm:flex-row sm:items-center mt-2 sm:mt-0 gap-2 sm:gap-4">
+                <div className="flex items-center gap-x-1.5">
                   <div
                     className={`flex-none rounded-full p-1 ${
                       isHighlighted ? "bg-green-600/20" : "bg-gray-300/20"
@@ -115,21 +121,21 @@ export default function Roommates() {
 
                   <p
                     className={`text-xs font-semibold ${
-                      isHighlighted ? "text-gray-600" : "text-gray-300"
+                      isHighlighted ? "text-gray-600" : "text-gray-400"
                     }`}
                   >
                     {isHighlighted ? "Pending task" : "Waiting"}
                   </p>
-
-                  {isHighlighted && (
-                    <button
-                      onClick={() => handleCollect(person)}
-                      className="ml-3 px-4 py-1.5 bg-green-500 hover:bg-green-600 text-white text-sm font-medium rounded-full shadow transition"
-                    >
-                      Collect
-                    </button>
-                  )}
                 </div>
+
+                {isHighlighted && (
+                  <button
+                    onClick={() => handleCollect(person)}
+                    className="px-3 py-1 bg-green-500 hover:bg-green-600 text-white text-xs sm:text-sm font-medium rounded-full shadow transition"
+                  >
+                    Collect
+                  </button>
+                )}
               </div>
             </li>
           );
