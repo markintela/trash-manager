@@ -14,30 +14,12 @@ import {
 
 // Links principais
 const mainNavigation = [
-  { name: "Historic", href: "#historic" },
+  { name: "Roommates", href: "#historic" },
   { name: "Dashboard", href: "#dashboard" },
 ];
 
 // Itens do dropdown
 const features = [
-  {
-    name: "Analytics",
-    description: "Visualize as tendências de lixo.",
-    href: "#analytics",
-    icon: BarChart,
-  },
-  {
-    name: "Pendences",
-    description: "Gerencie a fila de coleta atual.",
-    href: "#pendences",
-    icon: ClipboardList,
-  },
-  {
-    name: "Room Mates",
-    description: "Gerencie membros e escalas de limpeza.",
-    href: "#room-mates",
-    icon: Clock,
-  },
   {
     name: "Notifications",
     description: "Ative alertas para a sua vez.",
@@ -104,7 +86,7 @@ const Navbar: React.FC = () => {
               className="flex items-center gap-x-1 text-sm font-semibold text-gray-900 hover:text-green-700 transition"
               aria-expanded={isProductMenuOpen}
             >
-              Features
+                Historic
               <ChevronDown
                 className={`h-5 w-5 text-gray-400 transform transition-transform ${
                   isProductMenuOpen ? "rotate-180" : ""
@@ -141,22 +123,7 @@ const Navbar: React.FC = () => {
                   ))}
                 </div>
 
-                <div className="grid grid-cols-2 divide-x divide-gray-100 bg-gray-50">
-                  {callsToAction.map((item) => (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      onClick={() => setIsProductMenuOpen(false)}
-                      className="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold text-gray-900 hover:bg-gray-100 transition"
-                    >
-                      <Bell
-                        className="h-5 w-5 text-gray-400"
-                        aria-hidden="true"
-                      />
-                      {item.name}
-                    </Link>
-                  ))}
-                </div>
+               
               </div>
             )}
           </div>
