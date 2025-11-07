@@ -15,7 +15,7 @@ export default function Notification() {
 
   // 🔁 Busca inicial + atualização periódica
   useEffect(() => {
-      let interval: ReturnType<typeof setInterval>;
+    let isMounted = true;
 
     const fetchNotifications = async (isPolling = false) => {
       try {
@@ -24,15 +24,17 @@ export default function Notification() {
 
         // Evita re-renderização desnecessária (somente se houver mudança real)
         const currentHash = JSON.stringify(result);
-        if (currentHash !== lastDataRef.current) {
+        if (currentHash !== lastDataRef.current && isMounted) {
           lastDataRef.current = currentHash;
           setData(result);
         }
       } catch (error) {
-        console.error("Erro ao buscar notificações:", error);
+        console.error("Error fetching notifications:", error);
       } finally {
-        setLoading(false);
-        setIsUpdating(false);
+        if (isMounted) {
+          setLoading(false);
+          setIsUpdating(false);
+        }
       }
     };
 
@@ -40,19 +42,28 @@ export default function Notification() {
     fetchNotifications();
 
     // Atualiza a cada 5 segundos
-    interval = setInterval(() => fetchNotifications(true), 5000);
+    const interval: ReturnType<typeof setInterval> = setInterval(
+      () => fetchNotifications(true),
+      5000
+    );
 
-    return () => clearInterval(interval);
+    // Cleanup
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+    };
   }, []);
 
+  // 💬 Loader
   if (loading) {
     return (
       <div className="max-w-3xl mx-auto bg-white rounded-3xl shadow-sm p-6 mt-10 text-center text-gray-500 border border-gray-200">
-        Carregando notificações...
+        Loading notifications...
       </div>
     );
   }
 
+  // 💬 Conteúdo
   return (
     <div className="relative max-w-3xl mx-auto bg-white rounded-3xl shadow-sm p-6 mt-10 border border-gray-200 transition">
       <div className="flex items-center gap-2 mb-6">
@@ -61,7 +72,7 @@ export default function Notification() {
 
         {isUpdating && (
           <span className="ml-2 text-xs text-gray-400 animate-pulse">
-            Atualizando...
+            Updating...
           </span>
         )}
       </div>
@@ -75,7 +86,11 @@ export default function Notification() {
             : "text-emerald-600 bg-emerald-50 ring-emerald-100";
 
           return (
-            <li key={item.id} className="relative flex items-start transition-all">
+            <li
+              key={item.id}
+              className="relative flex items-start transition-all hover:scale-[1.01]"
+            >
+              {/* Linha da timeline */}
               {index !== data.length - 1 && (
                 <span
                   className="absolute left-5 top-6 h-full w-px bg-gray-200"
@@ -83,12 +98,14 @@ export default function Notification() {
                 />
               )}
 
+              {/* Ícone principal */}
               <span
                 className={`relative z-10 flex h-10 w-10 items-center justify-center rounded-full ring-2 ${iconColor}`}
               >
                 <Icon className="h-5 w-5" />
               </span>
 
+              {/* Conteúdo */}
               <div className="ml-6 flex justify-between w-full">
                 <div>
                   <p className="text-sm text-gray-700 font-medium">
@@ -97,7 +114,7 @@ export default function Notification() {
                         <span className="text-amber-700 font-semibold">
                           {item.roomMateName}
                         </span>{" "}
-                        ainda não jogou o lixo.
+                        still needs to take out the trash.
                       </>
                     ) : (
                       <>
@@ -117,7 +134,7 @@ export default function Notification() {
                           day: "numeric",
                           year: "numeric",
                         })
-                      : "Sem data"}
+                      : "No date"}
                   </p>
                 </div>
               </div>
