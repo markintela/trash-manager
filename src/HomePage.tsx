@@ -5,6 +5,7 @@ import Header from "./app/components/Header";
 import Navbar from "./app/components/Navbar";
 import Roommates from "./app/components/Roommates";
 import Notification from "./app/components/Notification";
+import Footer from "./app/components/Footer";
 
 type TrashItem = {
   id: number;
@@ -86,6 +87,7 @@ export default function HomePage() {
           />
         </div>
       </div>
+      <Footer />
     </>
   );
 }
