@@ -37,3 +37,8 @@ export const updateRoommate = async (id: number, roommate: Partial<Roommate>): P
 export const deleteRoommate = async (id: number): Promise<void> => {
   await axios.delete(`${API_URL}/${id}`);
 };
+
+export const getNextRomomMate = async (): Promise<Roommate> => {
+  const response = await axios.get(`${API_URL}/next`);
+  return response.data;
+};

@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getRoommates, Roommate } from "@/app/services/RoomMateService";
-import { getLastNotification } from "@/app/services/NotificationService";
+import { getRoommates, Roommate, getNextRomomMate } from "@/app/services/RoomMateService";
+// import { getLastNotification } from "@/app/services/NotificationService";
 
 export default function Roommates() {
   const [data, setData] = useState<Roommate[]>([]);
@@ -18,11 +18,11 @@ export default function Roommates() {
         // Busca roommates e última notificação simultaneamente
         const [roommates, lastNotification] = await Promise.all([
           getRoommates(),
-          getLastNotification(),
+          getNextRomomMate(),
         ]);
 
         setData(roommates);
-        setHighlightId(lastNotification.queueOrder); // guarda o QueueOrder
+        setHighlightId(lastNotification.id); // guarda o QueueOrder
       } catch (error) {
         console.error("Erro ao buscar dados:", error);
       } finally {
