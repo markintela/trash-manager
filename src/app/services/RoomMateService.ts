@@ -6,7 +6,7 @@ export interface Roommate {
   id: number;
   name: string;
   dateThrowOut: string;
-  isPending: boolean;
+  isActive: boolean;
 }
 
 // 🔹 Buscar todos os roommates
