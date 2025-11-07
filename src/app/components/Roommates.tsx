@@ -105,38 +105,45 @@ export default function Roommates() {
                 </div>
               </div>
 
-              <div className="flex flex-col items-end sm:flex-row sm:items-center mt-2 sm:mt-0 gap-2 sm:gap-4">
-                <div className="flex items-center gap-x-1.5">
-                  <div
-                    className={`flex-none rounded-full p-1 ${
-                      isHighlighted ? "bg-green-600/20" : "bg-gray-300/20"
-                    }`}
-                  >
-                    <div
-                      className={`h-1.5 w-1.5 rounded-full ${
-                        isHighlighted ? "bg-green-600" : "bg-gray-300"
-                      }`}
-                    />
-                  </div>
+             <div
+  className={`flex flex-col sm:flex-row sm:items-center sm:justify-end mt-3 sm:mt-0 ${
+    isHighlighted ? "gap-3 sm:gap-4" : "gap-2 sm:gap-3"
+  }`}
+>
+  {/* Indicador de status */}
+  <div className="flex items-center justify-center sm:justify-start gap-2">
+    <div
+      className={`flex-none rounded-full p-1.5 ${
+        isHighlighted ? "bg-green-100" : "bg-gray-200"
+      }`}
+    >
+      <div
+        className={`h-2 w-2 rounded-full ${
+          isHighlighted ? "bg-green-600" : "bg-gray-400"
+        }`}
+      />
+    </div>
 
-                  <p
-                    className={`text-xs font-semibold ${
-                      isHighlighted ? "text-gray-600" : "text-gray-400"
-                    }`}
-                  >
-                    {isHighlighted ? "Pending task" : "Waiting"}
-                  </p>
-                </div>
+    <p
+      className={`text-xs sm:text-sm font-medium ${
+        isHighlighted ? "text-green-700" : "text-gray-500"
+      }`}
+    >
+      {isHighlighted ? "Pending task" : "Waiting"}
+    </p>
+  </div>
 
-                {isHighlighted && (
-                  <button
-                    onClick={() => handleCollect(person)}
-                    className="px-3 py-1 bg-green-500 hover:bg-green-600 text-white text-xs sm:text-sm font-medium rounded-full shadow transition"
-                  >
-                    Collect
-                  </button>
-                )}
-              </div>
+  {/* Botão de ação */}
+  {isHighlighted && (
+    <button
+      onClick={() => handleCollect(person)}
+      className="mt-2 sm:mt-0 px-4 py-1.5 sm:px-5 sm:py-2 bg-green-500 hover:bg-green-600 text-white text-xs sm:text-sm font-medium rounded-full shadow-sm transition-all active:scale-95"
+    >
+      Collect
+    </button>
+  )}
+</div>
+
             </li>
           );
         })}
