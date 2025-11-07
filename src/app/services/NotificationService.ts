@@ -14,6 +14,14 @@ export interface Notification {
   isAbsence: boolean;
 }
 
+export interface CreateNotification {
+
+  queueOrder: number;
+  roomMateName: string;
+  isCollected: boolean;
+  isAbsence: boolean;
+}
+
 // Buscar todas as notificações
 export const getNotifications = async (): Promise<Notification[]> => {
   const response = await axios.get(API_URL);
@@ -27,7 +35,7 @@ export const getNotificationById = async (id: number): Promise<Notification> => 
 };
 
 // Criar nova notificação
-export const createNotification = async (notification: Partial<Notification>) => {
+export const createNotification = async (notification: Partial<CreateNotification>) => {
   const response = await axios.post(API_URL, notification);
   return response.data;
 };
