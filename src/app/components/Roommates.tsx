@@ -48,7 +48,7 @@ export default function Roommates() {
       <ul role="list" className="divide-y divide-gray-100">
         {data.map((person, index) => {
           const isHighlighted = person.id === highlightId;
-
+          const getStatusProps = person.isActive;
           return (
             <li
               key={person.id}
@@ -78,32 +78,33 @@ export default function Roommates() {
                     {person.name}
                   </p>
                   <p className="mt-1 truncate text-xs text-gray-500">
-                    {person.isPending ? "Pending task" : "Completed task"}
+                    {person.isActive? "Active" : "Out"}
                   </p>
                 </div>
               </div>
 
               <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                <p className="text-sm text-gray-900">Trash Date</p>
                 <div className="mt-1 flex items-center gap-x-1.5">
                   <div
                     className={`flex-none rounded-full p-1 ${
-                      person.isPending ? "bg-red-500/20" : "bg-emerald-500/20"
+                      isHighlighted ? "bg-green-600/20" : "bg-gray-300/20"
                     }`}
                   >
                     <div
                       className={`h-1.5 w-1.5 rounded-full ${
-                        person.isPending ? "bg-red-500" : "bg-emerald-500"
+                          isHighlighted ? "bg-green-600" : "bg-gray-300"
                       }`}
-                    />
+                    />  
                   </div>
-                  <p className="text-xs text-gray-500">
-                    {new Date(person.dateThrowOut).toLocaleDateString("en-US", {
-                      month: "short",
-                      day: "numeric",
-                      year: "numeric",
-                    })}
+                  
+                  <p  className={`text-xs font-semibold ${
+                          isHighlighted ? "text-gray-600" : "text-gray-300"
+                      }`}>
+                     {isHighlighted ? "Pending task" : "Waiting"}
                   </p>
+                  
+                     {isHighlighted ? <><br /> <a href="#" className="p-1 rounded-full bg-gren-50 px-3 py-1.5 font-medium text-grey-600 bg-green-300">Collect</a></>  : ""}                  
+                  
                 </div>
               </div>
             </li>
