@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://localhost:7221/api/roommates";
+const API_URL = "https://api-yellow-dwl1.onrender.com/api/roommates";
 
 export interface Roommate {
   id: number;
