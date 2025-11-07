@@ -26,23 +26,7 @@ export default function HomePage() {
   const [selectedItem, setSelectedItem] = useState<TrashItem | null>(null);
   const [trashTypes, setTrashTypes] = useState<string[]>([]);
 
-  useEffect(() => {
-    const initPushye = async () => {
-      if (typeof window === "undefined") return;
-      try {
-        const res = await fetch("https://pushye.com/api/{endpoint}", {
-          method: "GET",
-          headers: { Authorization: "Bearer 9de47333d53195642730b5089f0ce36a" },
-        });
-        if (!res.ok) throw new Error(`Erro HTTP ${res.status}`);
-        const data = await res.json();
-        console.log("✅ Pushye:", data);
-      } catch (err) {
-        console.error("❌ Erro Pushye:", err);
-      }
-    };
-    initPushye();
-  }, []);
+
 
   const handleOpenModal = (item: TrashItem) => {
     setSelectedItem(item);
@@ -86,7 +70,7 @@ export default function HomePage() {
 
         {/* Conteúdo */}
         <Roommates />
-        <Notification data={data} />
+        <Notification  />
 
         {/* Bottom gradient */}
         <div
