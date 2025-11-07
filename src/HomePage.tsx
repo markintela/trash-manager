@@ -15,13 +15,7 @@ type TrashItem = {
 };
 
 export default function HomePage() {
-  const [data] = useState<TrashItem[]>([
-    { id: 1, name: "Marcus", dateThrowOut: "2025-10-10", isPending: true },
-    { id: 2, name: "Alonso", dateThrowOut: "2025-10-12", isPending: false },
-    { id: 3, name: "Hanna", dateThrowOut: "2025-10-13", isPending: false },
-    { id: 4, name: "Jidenna", dateThrowOut: "2025-10-13", isPending: false },
-    { id: 5, name: "Kristina", dateThrowOut: "2025-10-13", isPending: false },
-  ]);
+
 
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState<TrashItem | null>(null);
