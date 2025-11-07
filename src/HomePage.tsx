@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Header from "./app/components/Header";
 import Navbar from "./app/components/Navbar";
 import Roommates from "./app/components/Roommates";
+import Notification from "./app/components/Notification";
 
 type TrashItem = {
   id: number;
@@ -66,9 +67,8 @@ export default function HomePage() {
   };
 
   return (
-    <> 
-    <Navbar/>
-      {/* Hero Section */}
+    <>
+      <Navbar />
       <div className="relative bg-white isolate px-6 pt-2 lg:px-8">
         {/* Background gradient */}
         <div
@@ -84,31 +84,9 @@ export default function HomePage() {
           />
         </div>
 
-        {/* Hero content */}
-        {/* <div className="mx-auto max-w-2xl py-22 sm:py-22 lg:py-18 text-center">
-          <p className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-            Trash Manager{" "}
-            {/* <br/>
-            <span className="text-green-500 text-3xl sm:text-2x1">trash smarter</span> */}
-          {/* </p>
-          <p className="mt-4 text-lg font-medium text-gray-600 sm:text-xl">
-            Organize collection schedules, roommates, and pending tasks — all
-            in one clean and efficient dashboard.
-          </p> */}
-          {/* <div className="mt-10 flex items-center justify-center gap-x-6">
-            <a
-              href="#"
-              className="rounded-md bg-green-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
-            >
-              Get Started
-            </a>
-            <a href="#" className="text-sm font-semibold text-gray-900">
-              Learn more <span aria-hidden="true">→</span>
-            </a>
-          </div> */}
-        {/* </div> } */}
-
+        {/* Conteúdo */}
         <Roommates />
+        <Notification data={data} />
 
         {/* Bottom gradient */}
         <div
