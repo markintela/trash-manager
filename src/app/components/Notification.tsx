@@ -15,7 +15,7 @@ export default function Notification() {
 
   // 🔁 Busca inicial + atualização periódica
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+      let interval: ReturnType<typeof setInterval>;
 
     const fetchNotifications = async (isPolling = false) => {
       try {
