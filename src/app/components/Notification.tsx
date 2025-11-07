@@ -67,7 +67,6 @@ export default function Notification() {
   return (
     <div className="relative max-w-3xl mx-auto bg-white rounded-3xl shadow-sm p-6 mt-10 border border-gray-200 transition">
       <div className="flex items-center gap-2 mb-6">
-        <Bell className="w-5 h-5 text-gray-600" />
         <h2 className="text-2xl font-bold text-gray-800">Notifications</h2>
 
         {isUpdating && (
