@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Trash Manahger",
+  title: "Trash Manager",
   description: "Yellow house",
 };
 
