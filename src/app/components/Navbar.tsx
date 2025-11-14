@@ -15,6 +15,7 @@ import {
 // Links principais do menu
 // -------------------------------
 const mainNavigation = [
+  { name: "Home", href: "./" },
   { name: "Roommates", href: "/roommates" },
   { name: "Dashboard", href: "/dashboard" },
 ];
@@ -79,7 +80,7 @@ const Navbar: React.FC = () => {
         {/* DESKTOP MENU */}
         <div className="hidden lg:flex lg:gap-x-12">
           {/* HISTORIC DROPDOWN */}
-          <div className="relative">
+          {/* <div className="relative">
             <button
               type="button"
               onClick={() => setIsHistoricOpen(!isHistoricOpen)}
@@ -114,7 +115,7 @@ const Navbar: React.FC = () => {
                 ))}
               </div>
             )}
-          </div>
+          </div> */}
 
           {/* SIMPLE LINKS */}
           {mainNavigation.map((item) => (
