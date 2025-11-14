@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Header from "./app/components/Header";
-import Navbar from "./app/components/Navbar";
 import Roommates from "./app/components/Roommates";
 import Notification from "./app/components/Notification";
 import Footer from "./app/components/Footer";
@@ -47,7 +46,7 @@ export default function HomePage() {
 
   return (
     <>
-      <Navbar />
+
       <div className="relative bg-white isolate px-6 pt-2 lg:px-8">
 
         {/* Background gradient */}

@@ -6,47 +6,50 @@ import {
   Menu,
   X,
   ChevronDown,
-  BarChart,
   Bell,
-  ClipboardList,
-  Clock,
+  Users,
+  BarChart3,
 } from "lucide-react";
 
-// Links principais
+// -------------------------------
+// Links principais do menu
+// -------------------------------
 const mainNavigation = [
-  { name: "Roommates", href: "#historic" },
-  { name: "Dashboard", href: "#dashboard" },
+  { name: "Roommates", href: "/roommates" },
+  { name: "Dashboard", href: "/dashboard" },
 ];
 
-// Itens do dropdown
-const features = [
+// -------------------------------
+// Itens do dropdown "Historic"
+// -------------------------------
+const historicDropdown = [
   {
     name: "Notifications",
-    description: "Ative alertas para a sua vez.",
-    href: "#notifications",
+    description: "View trash queue events and status.",
+    href: "/notifications",
     icon: Bell,
+  },
+  {
+    name: "Roommates",
+    description: "Manage people in the rotation.",
+    href: "/roommates",
+    icon: Users,
   },
 ];
 
-// Ações secundárias
-const callsToAction = [
-  { name: "Watch Demo", href: "#demo" },
-  { name: "Contact Support", href: "#support" },
-];
-
+// -------------------------------
+// Navbar Component
+// -------------------------------
 const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isProductMenuOpen, setIsProductMenuOpen] = useState(false);
-  const [isMobileProductMenuOpen, setIsMobileProductMenuOpen] = useState(false);
+  const [isHistoricOpen, setIsHistoricOpen] = useState(false);
+  const [isMobileHistoricOpen, setIsMobileHistoricOpen] = useState(false);
 
   const Logo = () => (
     <Link href="/" className="-m-2 p-2 flex items-center gap-2">
-      <img
-        src="/images/logo.jpg"
-        alt="Logo Trash Manager"
-        className="h-12 w-auto"
-      />
-      <p className="text-2xl font-bold tracking-tight text-gray-900 sm:text-2xl">
+      <img src="/images/logo.jpg" alt="Logo Trash Manager" className="h-10 w-auto" />
+
+      <p className="text-xl font-bold tracking-tight text-gray-900">
         Trash Manager
       </p>
     </Link>
@@ -58,77 +61,62 @@ const Navbar: React.FC = () => {
         className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
         aria-label="Global"
       >
-        {/* Logo */}
+        {/* LOGO */}
         <div className="flex lg:flex-1">
           <Logo />
         </div>
 
-        {/* Botão do menu mobile */}
+        {/* MOBILE MENU BUTTON */}
         <div className="flex lg:hidden">
           <button
-            type="button"
             onClick={() => setIsMobileMenuOpen(true)}
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+            className="p-2 rounded-md text-gray-700"
           >
-            <span className="sr-only">Abrir menu principal</span>
-            <Menu className="h-6 w-6" aria-hidden="true" />
+            <Menu className="h-6 w-6" />
           </button>
         </div>
 
-        {/* Menu Desktop */}
+        {/* DESKTOP MENU */}
         <div className="hidden lg:flex lg:gap-x-12">
-          {/* Dropdown Features */}
+          {/* HISTORIC DROPDOWN */}
           <div className="relative">
             <button
               type="button"
-              onClick={() => setIsProductMenuOpen(!isProductMenuOpen)}
-              onBlur={() => setTimeout(() => setIsProductMenuOpen(false), 100)}
-              className="flex items-center gap-x-1 text-sm font-semibold text-gray-900 hover:text-green-700 transition"
-              aria-expanded={isProductMenuOpen}
+              onClick={() => setIsHistoricOpen(!isHistoricOpen)}
+              className="flex items-center gap-1 text-sm font-semibold text-gray-900 hover:text-green-700 transition"
             >
-                Historic
+              Historic
               <ChevronDown
-                className={`h-5 w-5 text-gray-400 transform transition-transform ${
-                  isProductMenuOpen ? "rotate-180" : ""
+                className={`h-5 w-5 text-gray-400 transition-transform ${
+                  isHistoricOpen ? "rotate-180" : ""
                 }`}
               />
             </button>
 
-            {isProductMenuOpen && (
-              <div className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-xl ring-1 ring-gray-900/5 transition ease-out duration-200 origin-top-left">
-                <div className="p-4">
-                  {features.map((item) => (
-                    <div
-                      key={item.name}
-                      className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm hover:bg-green-50 transition"
-                    >
-                      <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-green-100">
-                        <item.icon
-                          className="h-6 w-6 text-gray-600 group-hover:text-green-600"
-                          aria-hidden="true"
-                        />
-                      </div>
-                      <div className="flex-auto">
-                        <Link
-                          href={item.href}
-                          onClick={() => setIsProductMenuOpen(false)}
-                          className="block font-semibold text-gray-900"
-                        >
-                          {item.name}
-                          <span className="absolute inset-0" />
-                        </Link>
-                        <p className="mt-1 text-gray-600">{item.description}</p>
-                      </div>
+            {isHistoricOpen && (
+              <div className="absolute left-0 top-full mt-3 w-72 rounded-2xl bg-white shadow-xl ring-1 ring-gray-200 p-4">
+                {historicDropdown.map((item) => (
+                  <Link
+                    href={item.href}
+                    key={item.name}
+                    onClick={() => setIsHistoricOpen(false)}
+                    className="flex gap-4 items-start p-3 rounded-lg hover:bg-green-50 transition"
+                  >
+                    <div className="p-3 bg-gray-50 rounded-lg flex items-center justify-center group-hover:bg-green-100">
+                      <item.icon className="h-6 w-6 text-gray-700" />
                     </div>
-                  ))}
-                </div>
 
-               
+                    <div>
+                      <p className="font-semibold text-gray-900">{item.name}</p>
+                      <p className="text-sm text-gray-600">{item.description}</p>
+                    </div>
+                  </Link>
+                ))}
               </div>
             )}
           </div>
 
-          {/* Links simples */}
+          {/* SIMPLE LINKS */}
           {mainNavigation.map((item) => (
             <Link
               key={item.name}
@@ -140,92 +128,84 @@ const Navbar: React.FC = () => {
           ))}
         </div>
 
-        {/* Login Desktop */}
+        {/* LOGIN BUTTON (DESKTOP) */}
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <Link
             href="#login"
-            className="text-sm font-semibold text-gray-900 hover:text-green-700 transition"
+            className="text-sm font-semibold text-gray-900 hover:text-green-700"
           >
-            Log in <span aria-hidden="true">&rarr;</span>
+            Log in →
           </Link>
         </div>
       </nav>
 
-      {/* Menu Mobile */}
+      {/* MOBILE MENU */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-[60] bg-black/50 backdrop-blur-sm lg:hidden">
-          <div className="fixed inset-y-0 right-0 z-[60] w-full overflow-y-auto bg-white p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+        <div className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm lg:hidden">
+          <div className="fixed right-0 top-0 h-full w-80 bg-white p-6 shadow-xl">
             <div className="flex items-center justify-between">
               <Logo />
+
               <button
-                type="button"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="-m-2.5 rounded-md p-2.5 text-gray-700"
+                className="p-2 rounded-md"
               >
-                <span className="sr-only">Fechar menu</span>
-                <X className="h-6 w-6" aria-hidden="true" />
+                <X className="h-6 w-6 text-gray-700" />
               </button>
             </div>
 
-            <div className="mt-6 flow-root">
-              <div className="-my-6 divide-y divide-gray-500/10">
-                <div className="space-y-2 py-6">
-                  {/* Dropdown Mobile */}
-                  <div className="-mx-3">
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setIsMobileProductMenuOpen(!isMobileProductMenuOpen)
-                      }
-                      className="flex w-full items-center justify-between rounded-lg py-2 px-3 text-base font-semibold text-gray-900 hover:bg-gray-50"
-                      aria-expanded={isMobileProductMenuOpen}
-                    >
-                      Features
-                      <ChevronDown
-                        className={`h-5 w-5 transform transition-transform ${
-                          isMobileProductMenuOpen ? "rotate-180" : ""
-                        }`}
-                      />
-                    </button>
+            <div className="mt-6">
+              {/* MOBILE HISTORIC DROPDOWN */}
+              <button
+                onClick={() => setIsMobileHistoricOpen(!isMobileHistoricOpen)}
+                className="flex w-full items-center justify-between px-3 py-2 text-base font-semibold text-gray-900 rounded-lg hover:bg-gray-100"
+              >
+                Historic
+                <ChevronDown
+                  className={`h-5 w-5 transition-transform ${
+                    isMobileHistoricOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
 
-                    {isMobileProductMenuOpen && (
-                      <div className="mt-2 space-y-2">
-                        {[...features, ...callsToAction].map((item) => (
-                          <Link
-                            key={item.name}
-                            href={item.href}
-                            onClick={() => setIsMobileMenuOpen(false)}
-                            className="block rounded-lg py-2 pl-6 text-sm font-semibold text-gray-900 hover:bg-green-50"
-                          >
-                            {item.name}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Links móveis */}
-                  {mainNavigation.map((item) => (
+              {isMobileHistoricOpen && (
+                <div className="ml-3 mt-2 space-y-2">
+                  {historicDropdown.map((item) => (
                     <Link
                       key={item.name}
                       href={item.href}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-gray-900 hover:bg-green-50"
+                      className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-800 hover:bg-green-50"
                     >
                       {item.name}
                     </Link>
                   ))}
                 </div>
+              )}
 
-                <div className="py-6">
+              {/* MOBILE SIMPLE LINKS */}
+              <div className="mt-4 space-y-2">
+                {mainNavigation.map((item) => (
                   <Link
-                    href="#login"
+                    key={item.name}
+                    href={item.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold text-gray-900 hover:bg-green-50"
+                    className="block rounded-lg px-3 py-2 text-base font-semibold text-gray-900 hover:bg-green-50"
                   >
-                    Log in
+                    {item.name}
                   </Link>
-                </div>
+                ))}
+              </div>
+
+              {/* LOGIN MOBILE */}
+              <div className="mt-6">
+                <Link
+                  href="#login"
+                  className="block rounded-lg px-3 py-2 text-base font-semibold text-gray-900 hover:bg-green-50"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Log in
+                </Link>
               </div>
             </div>
           </div>
