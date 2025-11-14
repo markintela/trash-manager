@@ -148,7 +148,7 @@ export default function Dashboard() {
       {/* Recent Notifications */}
       <div className="p-6 bg-white shadow rounded-2xl border border-gray-200">
         <div className="flex items-center gap-2 mb-4">
-          <Bell className="text-gray-600" />
+    
           <h2 className="text-xl font-semibold">
             Recent Notifications
           </h2>

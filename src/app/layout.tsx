@@ -29,7 +29,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
 
-        <div className="relative bg-white isolate px-6 pt-2 lg:px-8">
+     <div className="relative bg-white isolate w-full">
+
 
         {/* Background gradient */}
         <div
