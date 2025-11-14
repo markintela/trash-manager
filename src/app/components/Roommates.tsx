@@ -53,7 +53,6 @@ export default function Roommates() {
       await createNotification(notification);
       alert(`✅ Coleta registrada para ${person.name}`);
 
-      // 🔁 Atualiza a lista sem recarregar a página
       await fetchData();
     } catch (error) {
       console.error("Erro ao criar notificação:", error);
@@ -76,13 +75,16 @@ export default function Roommates() {
       <ul role="list" className="divide-y divide-gray-100">
         {data.map((person, index) => {
           const isHighlighted = person.id === highlightId;
+          const isOut = !person.isActive;
 
           return (
             <li
               key={person.id}
-              className={`flex justify-between gap-x-6 transition-all ${
-                isHighlighted ? "py-10 scale-[1.02] rounded-xl" : "py-5"
-              }`}
+              className={`
+                flex justify-between gap-x-6 transition-all 
+                ${isHighlighted ? "py-10 scale-[1.02] rounded-xl" : "py-5"}
+                ${isOut ? "opacity-50 grayscale" : ""}
+              `}
             >
               <div className="flex min-w-0 gap-x-4">
                 <img
@@ -90,20 +92,28 @@ export default function Roommates() {
                     fallbackColors[index % fallbackColors.length]
                   }&color=ffffff`}
                   alt={person.name}
-                  className={`flex-none rounded-full bg-gray-100 shadow-sm ${
-                    isHighlighted ? "h-20 w-20 sm:h-28 sm:w-28" : "h-10 w-10"
-                  }`}
+                  className={`
+                    flex-none rounded-full bg-gray-100 shadow-sm
+                    ${isHighlighted ? "h-20 w-20 sm:h-28 sm:w-28" : "h-10 w-10"}
+                    ${isOut ? "opacity-40" : ""}
+                  `}
                 />
+
                 <div className="min-w-0 flex-auto">
                   <p
-                    className={`font-semibold text-gray-900 ${
+                    className={`font-semibold ${
                       isHighlighted ? "text-2xl" : "text-sm"
-                    }`}
+                    } ${isOut ? "text-gray-400" : "text-gray-900"}`}
                   >
                     {person.name}
                   </p>
-                  <p className="mt-1 truncate text-xs text-gray-500">
-                    {person.isActive ? "Active" : "Out"}
+
+                  <p
+                    className={`mt-1 truncate text-xs ${
+                      isOut ? "text-gray-400" : "text-gray-500"
+                    }`}
+                  >
+                    {isOut ? "Out" : "Active"}
                   </p>
                 </div>
               </div>
@@ -117,29 +127,48 @@ export default function Roommates() {
                 <div className="flex items-center justify-center sm:justify-start gap-2">
                   <div
                     className={`flex-none rounded-full p-1.5 ${
-                      isHighlighted ? "bg-green-100" : "bg-gray-200"
+                      isOut
+                        ? "bg-gray-200"
+                        : isHighlighted
+                        ? "bg-green-100"
+                        : "bg-gray-200"
                     }`}
                   >
                     <div
                       className={`h-2 w-2 rounded-full ${
-                        isHighlighted ? "bg-green-600" : "bg-gray-400"
+                        isOut
+                          ? "bg-gray-400"
+                          : isHighlighted
+                          ? "bg-green-600"
+                          : "bg-gray-400"
                       }`}
                     />
                   </div>
 
                   <p
                     className={`text-xs sm:text-sm font-medium ${
-                      isHighlighted ? "text-green-700" : "text-gray-500"
+                      isOut
+                        ? "text-gray-400"
+                        : isHighlighted
+                        ? "text-green-700"
+                        : "text-gray-500"
                     }`}
                   >
-                    {isHighlighted ? "Pending task" : "Waiting"}
+                    {isOut
+                      ? "Unavailable"
+                      : isHighlighted
+                      ? "Pending task"
+                      : "Waiting"}
                   </p>
                 </div>
 
-                {isHighlighted && (
+                {/* Botão só aparece se for o da vez e ele estiver ativo */}
+                {!isOut && isHighlighted && (
                   <button
                     onClick={() => handleCollect(person)}
-                    className="mt-2 sm:mt-0 px-4 py-1.5 sm:px-5 sm:py-2 bg-green-500 hover:bg-green-600 text-white text-xs sm:text-sm font-medium rounded-full shadow-sm transition-all active:scale-95"
+                    className="mt-2 sm:mt-0 px-4 py-1.5 sm:px-5 sm:py-2 bg-green-500 hover:bg-green-600 
+                    text-white text-xs sm:text-sm font-medium rounded-full shadow-sm 
+                    transition-all active:scale-95"
                   >
                     Collect
                   </button>
