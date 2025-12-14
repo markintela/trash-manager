@@ -41,10 +41,11 @@ export default function Notification() {
     // Busca inicial
     fetchNotifications();
 
-    // Atualiza a cada 5 segundos
+   
+    const ONE_HOUR = 60 * 60 * 1000;
     const interval: ReturnType<typeof setInterval> = setInterval(
       () => fetchNotifications(true),
-      5000000
+      ONE_HOUR
     );
 
     // Cleanup
