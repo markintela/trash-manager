@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // URL base da API
-const API_URL = "https://api-yellow-dwl1.onrender.com/api/notification";
+const API_URL = "https://localhost:7221/api/notification";
 
 // Define o modelo Notification conforme o backend
 export interface Notification {
