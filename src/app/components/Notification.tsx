@@ -44,7 +44,7 @@ export default function Notification() {
     // Atualiza a cada 5 segundos
     const interval: ReturnType<typeof setInterval> = setInterval(
       () => fetchNotifications(true),
-      5000
+      5000000
     );
 
     // Cleanup
