@@ -39,6 +39,6 @@ export const deleteRoommate = async (id: number): Promise<void> => {
 };
 
 export const getNextRomomMate = async (): Promise<Roommate> => {
-  const response = await axios.get(`${API_URL}`);
+  const response = await axios.get(`${API_URL}/next`);
   return response.data;
 };
